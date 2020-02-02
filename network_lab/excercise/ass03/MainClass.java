@@ -1,5 +1,3 @@
-package v5_from_v4_but_using_condition_and_not_interrupt_to_communicate;
-
 public class MainClass {
 	// SHARED RESOURCE for circular buffer equipe
 	int lastDoc = 0;
