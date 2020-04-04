@@ -1,7 +1,7 @@
 # network_lab
 This folder include some of my projects or exercises made for my course of Network computing Laboratory.
 
-- ass03 is an exercize with multithreading architecture.
+- ass03 is an exercise with multithreading architecture.
 
 # Word Quizzle
 FinalProject_WordQuizzle contains my final project in Java for network computing course. 
