@@ -22,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
 		
 public class Server {
 	static int UDP_Port = 9998; //usato per gestire la comunicazione UDP 
-	static int sizeUDPDatagram = 1+100; //1 per il byte richiesta, 100 √® un valore arbitrario sufficiente con le attuali scelte implementative
+	static int sizeUDPDatagram = 1+100; //1 per il byte richiesta, 100 Ë un valore arbitrario sufficiente con le attuali scelte implementative
 	static int RegistryPORT = 1201; //usato per il server RMI
 	static int LoggerPORT = 9999; //usato per la comunicazione TCP
 	static HashMap<String, User> usersDB = null; //map di utenti registrati raggiungibili tramite nome utente
@@ -96,7 +96,7 @@ public class Server {
 		
 		SocketChannel socketChannel = null;
 		while(!stopServer) {
-		//3) Ottengo le chiavi che sono pronte (select √® bloccante), all'inizio solo quella del server che far√† accept
+		//3) Ottengo le chiavi che sono pronte (select Ë bloccante), all'inizio solo quella del server che far‡ accept
 			try {
 				selector.select();
 			} catch (IOException e) {
@@ -281,7 +281,7 @@ public class Server {
 			case 33: //l'altro non ha ancora finito
 				break;
 				
-			case 42: //la partita dell'altro √® nulla
+			case 42: //la partita dell'altro Ë nulla
 				synchronized (lock) {
 					//rendi nulla la partita di questo player
 					possibleChallenges.annulChallenge(clientUsername);
@@ -299,7 +299,7 @@ public class Server {
 		String clientUsername = socketToUser.get(clientChannel).username;
 		Object lock = locks.get(clientUsername);
 		String wordToTranslate = null;
-		byte ack; //indica che la partita √® finita
+		byte ack; //indica che la partita Ë finita
 		byte[] bytes = null;
 		synchronized (lock) {
 			ack = possibleChallenges.canObtainWordToTranslate(clientUsername);
@@ -312,14 +312,14 @@ public class Server {
 				bytes = String.format("%-"+bytesSentWord+"s", wordToTranslate).getBytes();
 				break;
 			
-			case  9: //la partita √® finita, ottieni risultato
+			case  9: //la partita Ë finita, ottieni risultato
 				synchronized (lock) {
 					bytes = new byte[] {possibleChallenges.whoWon(clientUsername)};
 					possibleChallenges.concludeChallenge(clientUsername);
 				}
 				break;
 				
-			case 42: //la partita dell'altro √® nulla
+			case 42: //la partita dell'altro Ë nulla
 				synchronized (lock) {
 					//rendi nulla la partita di questo player
 					possibleChallenges.annulChallenge(clientUsername);
@@ -342,7 +342,7 @@ public class Server {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		byte ack; //indica che la partita √® finita
+		byte ack; //indica che la partita Ë finita
 		byte[] bytes = null;
 		synchronized (lock) {
 			ack = possibleChallenges.putWordTranslatedAndTestTerminationMatch(wordTranslated, clientUsername);
@@ -350,7 +350,7 @@ public class Server {
 		
 		//ricevo stato della partita
 		switch (ack) {
-		case 0: //la partita non √® ancora finita
+		case 0: //la partita non Ë ancora finita
 			break;
 			
 		case 9: //partita conclusa
@@ -363,7 +363,7 @@ public class Server {
 		case 33: //le parole sono finite
 			break;
 			
-		case 42: //la partita dell'altro √® nulla
+		case 42: //la partita dell'altro Ë nulla
 			synchronized (lock) {
 				//rendi nulla la partita di questo player
 				possibleChallenges.annulChallenge(clientUsername);
@@ -391,7 +391,7 @@ public class Server {
 		//prendo la lock per gestire le possiblechallenges
 		Object lock = locks.get(challengerUsername);
 		synchronized (lock) {
-			//controlla che la sfida non √® scaduta
+			//controlla che la sfida non Ë scaduta
 			if(possibleChallenges.setAcceptedStatusOfThisChallengeIfNotExpired(false, challengerUsername)) {
 				//System.out.println(">> refuseGame: sfida non scaduta");
 				//segnala a handlerPossibleChallenge di fermarsi
@@ -400,12 +400,12 @@ public class Server {
 				//invia al challenger.perform(Send)Challenge il rifiuto dell'amico
 				Client.sendTCPMessage((byte) 8, null, usersDB.get(challengerUsername).socketCh);
 				
-				//friend si aspetta un ack 0 se √® andato tutto ok
+				//friend si aspetta un ack 0 se Ë andato tutto ok
 				Client.sendTCPMessage((byte) 0, null, clientChannel);
 			}
 			//sfida scaduta
 			else {
-				//viene restituito che la sfida √® scaduta
+				//viene restituito che la sfida Ë scaduta
 				//System.out.println(">> refuseGame: sfida scaduta");
 				Client.sendTCPMessage((byte) 9, null, clientChannel);
 				//il challenger lo sa tramite l'handler scadenza sfida
@@ -440,7 +440,7 @@ public class Server {
 				startMatch(clientChannel, friendChannel);
 			} else {
 				//System.out.println(">> acceptGame: sfida scaduta");
-				//viene restituito che la sfida √® scaduta
+				//viene restituito che la sfida Ë scaduta
 				Client.sendTCPMessage((byte) 9, null, clientChannel);
 				//il challenger lo sa tramite l'handler scadenza sfida
 			}
@@ -454,7 +454,7 @@ public class Server {
 		int dictionarySize = allWords.size();
 		if(dictionarySize < nWordsToTranslate) {
 			nWordsToTranslate = dictionarySize;
-			System.out.println("Dizionario √® piccolo, si tradurranno "+dictionarySize+" parole");
+			System.out.println("Dizionario Ë piccolo, si tradurranno "+dictionarySize+" parole");
 		}
 		
 		//seleziona un tot di parole dal dizionario
@@ -477,13 +477,13 @@ public class Server {
 			System.out.println("> fine stampa soluzioni sfida "+socketToUser.get(player1Channel).username+" vs "+socketToUser.get(player2Channel).username);
 			
 			ack = 0;
-			//invia numero di parole, tempo partita in secondi e quanti byte √® una parola
+			//invia numero di parole, tempo partita in secondi e quanti byte Ë una parola
 			byte[] bytes = Client.mergeBytes(Client.mergeBytes(intToBytes(nWordsToTranslate), intToBytes(matchTime)), intToBytes(bytesSentWord));
 			Client.sendTCPMessage(ack, bytes, player1Channel);
 			Client.sendTCPMessage(ack, bytes, player2Channel);
 		} else {
 			ack = 9;
-			//non √® stato possibile tradurre le parole
+			//non Ë stato possibile tradurre le parole
 			//invia partita fallita
 			Client.sendTCPMessage(ack, null, player1Channel);
 			Client.sendTCPMessage(ack, null, player2Channel);
@@ -503,7 +503,7 @@ public class Server {
 		String clientUsername = new String(names, 0, User.USERNAME).trim();
 		String friendUsername = new String(names, User.USERNAME, User.USERNAME).trim();
 
-		//la put sovrascrive quindi chi prender√† questa lock l'avr√† aggiornata
+		//la put sovrascrive quindi chi prender‡ questa lock l'avr‡ aggiornata
 		Object lock = new Object();
 		locks.put(clientUsername, lock);
 		locks.put(friendUsername, lock);
@@ -513,7 +513,7 @@ public class Server {
 		//fai dei controlli su friend
 		//controlla che l'utente non stia sfidando se stesso
 		if (clientUsername.equals(friendUsername)) {
-			//non pu√≤ sfidare se stesso
+			//non puÚ sfidare se stesso
 			ack = 5;
 		} else {
 			//controllo che tra gli amici di client ci sia friend
@@ -564,10 +564,10 @@ public class Server {
 				try {
 					Thread.sleep(secondsBeforeChallengeExpire * 1000);
 				} catch (InterruptedException e) {
-					//se l'altro utente ha interagito ricevo interrupt e smetto di eseguire, a chiuderla ci penser√† il server
+					//se l'altro utente ha interagito ricevo interrupt e smetto di eseguire, a chiuderla ci penser‡ il server
 					synchronized (lock) {
 						if(possibleChallenges.isHandlerStopped(challenger)) {
-							//se la partita √® stata rifiutata
+							//se la partita Ë stata rifiutata
 							if(!possibleChallenges.challengeIsAccepted(challenger)) {
 								//cancella la sfida
 								possibleChallenges.cancelChallenges(challenger);
@@ -582,7 +582,7 @@ public class Server {
 					//scaduta, cancella challenge
 					possibleChallenges.cancelChallenges(challenger);
 					
-					//invia messaggio al challenger che challenge √® scaduta
+					//invia messaggio al challenger che challenge Ë scaduta
 					Client.sendTCPMessage((byte) 9, null, usersDB.get(challenger).socketCh);
 					System.out.println("handlerPossibleChallengeThread: challenge tra "+challenger+" e "+friend+" scaduta");
 				}
@@ -707,7 +707,7 @@ public class Server {
 				updateOrCreateDBFile();
 				ack = 0;
 			} else {
-				ack = 4; //gi√† amici
+				ack = 4; //gi‡ amici
 			}
 		} else ack = 2; //utente non registrato
 		return ack;
@@ -803,7 +803,7 @@ public class Server {
 		//System.out.println("ESITO avviaServer: "+(usersDB==null));
 		SignUpServerRMI server = new SignUpServerRMI(usersDB);
 		
-		// creo un'istanza dell'oggetto che ‚Äúrappresenta‚Äù l'oggetto remoto mediante il suo riferimento, ossia lo stub
+		// creo un'istanza dell'oggetto che ìrappresentaî l'oggetto remoto mediante il suo riferimento, ossia lo stub
 		UserSignUpInt stub = (UserSignUpInt) UnicastRemoteObject.exportObject(server, 0);
 		
 		// lancia un registro RMI sull'host locale, su una porta specificata e restituisce un riferimento al registro
@@ -836,7 +836,7 @@ public class Server {
 		}
 	}
 	
-	//√® stata creata poich√® avendo un canale udp non bloccante non posso usare la funzione sendUDP di Client
+	//Ë stata creata poichË avendo un canale udp non bloccante non posso usare la funzione sendUDP di Client
 	//request: rappresenta il tipo di richiesta, consultare la relazione del progetto
 	//bytes: byte array da inviare, il payload
 	//address: indirizzo del destinatario
