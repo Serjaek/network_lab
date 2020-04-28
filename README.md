@@ -1,5 +1,5 @@
 # Word Quizzle
-FinalProject_WordQuizzle contains my final project in Java for my Network Computing course.
+'FinalProject_WordQuizzle' folder contains my final project, WordQuizzle, written in Java for my Network Computing course.
 At the moment, the english language is not fully supported and comments and report are written partially in italian.
 
 # network_lab
