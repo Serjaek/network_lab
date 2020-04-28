@@ -4,8 +4,9 @@ At the moment these project and documentation are realized in italian language.
 Questa cartella contiene i file sorgenti e altri file necessari a far funzionare il progetto Word Quizzle sviluppato come progetto del corso di Reti e Calcolatori, parte Laboratorio.
 C'è anche la relazione sul progetto intitolata "Networking_Lab_Project_Report__Word_Quizzle"
 
-Guida all'utilizzo
-    Per lo sviluppo del progetto ho usato l'IDE Eclipse 9.19 e JavaSE-1.8. Ho inoltre
+Guida all'utilizzo:
+
+Per lo sviluppo del progetto ho usato l'IDE Eclipse 9.19 e JavaSE-1.8. Ho inoltre
     utilizzato la libreria esterna Gson-2.8.6.jar.
     Il progetto è stato esportato sotto forma di JAR e può essere importato su
     eclipse creando un nuovo progetto java vuoto e poi scegliendo l'opzione Import...
