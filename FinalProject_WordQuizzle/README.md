@@ -1,5 +1,5 @@
 # Word Quizzle - Project in Java
-At the moment these project and documentation are realized in Italian.
+At the moment these project and documentation are realized in italian language.
 
 Questa cartella contiene i file sorgenti e altri file necessari a far funzionare il progetto Word Quizzle sviluppato come progetto del corso di Reti e Calcolatori, parte Laboratorio.
 C'è anche la relazione sul progetto intitolata "Networking_Lab_Project_Report__Word_Quizzle"
